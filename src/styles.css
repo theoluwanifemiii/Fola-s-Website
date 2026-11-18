@@ -250,6 +250,7 @@ p, h1, h2, h3, figure, blockquote, dl, dd { margin: 0; }
 .photo {
   display: block;
   width: 100%;
+  height: auto;
   object-fit: cover;
   filter: grayscale(1) contrast(1.05);
   border: 1px solid var(--ink);
