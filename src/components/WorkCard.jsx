@@ -6,10 +6,10 @@ export default function WorkCard({ to, tags, title, text, media }) {
     <Link className="work-card" to={to}>
       {media}
       <div className="work-card__body">
-        <TagList items={tags} size="xs" />
+        <TagList items={tags} size="xs" reveal={false} />
         <h3 className="work-card__title">{title}</h3>
         <p className="body-sm" style={{ lineHeight: 1.5 }}>{text}</p>
-        <p className="work-card__cta">READ CASE STUDY →</p>
+        <p className="work-card__cta">READ CASE STUDY <span className="arrow">→</span></p>
       </div>
     </Link>
   );

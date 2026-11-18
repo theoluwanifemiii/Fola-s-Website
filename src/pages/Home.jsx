@@ -6,11 +6,14 @@ import FooterLine, { COPYRIGHT, EMAIL } from '../components/FooterLine.jsx';
 import { Tag, TagList } from '../components/Tags.jsx';
 import { ArrowDown } from '../components/Icons.jsx';
 import usePageTitle from '../components/usePageTitle.js';
+import Ticker from '../components/Ticker.jsx';
+import { useDraggable, SplitWords } from '../components/Motion.jsx';
 
 const ROLES = ['PRODUCT MANAGER', 'PRODUCT MARKETER', 'OPERATIONS', 'WRITER', '11+ YEARS', 'LAGOS, NIGERIA'];
 const SKILLS = ['GO TO MARKET', 'USER RESEARCH', 'ROADMAPS', 'POSITIONING', 'PROCESS DESIGN', 'STAKEHOLDERS', 'UX WRITING', 'CONTENT STRATEGY'];
 
 function Hero() {
+  const tagRef = useDraggable();
   return (
     <div className="intro hero">
       <Ghost>ABDULWAHAB</Ghost>
@@ -19,11 +22,11 @@ function Hero() {
       <section className="hero__body">
         <div className="hero__col">
           <p className="hero__me">ME</p>
-          <div className="tags">
+          <div className="tags" data-reveal="stagger" style={{ '--d': 350 }}>
             {ROLES.map((r) => <Tag key={r}>{r}</Tag>)}
             <Tag href={`mailto:${EMAIL}`}>{EMAIL.toUpperCase()}</Tag>
           </div>
-          <p className="hero__bio">
+          <p className="hero__bio" data-reveal style={{ '--d': 650 }}>
             i started out in audit and investment research, spent years writing for tech, insurance and finance, then
             moved deeper into building products. i co-founded vascan and pramie, ran operations at halvest, and today i
             lead product marketing at medicare supply chain. somewhere in between, i published 14 poetry collections.
@@ -32,14 +35,15 @@ function Hero() {
 
         <div className="hero__portrait">
           <img src="/img/hero-portrait.png" width="1003" height="884" alt="Fọlábòmí in his fila cap and printed agbada, smiling" />
-          <div className="name-tag">
+          <div className="name-tag" ref={tagRef} title="Drag me">
             <p className="name-tag__hello">HELLO!</p>
             <p className="name-tag__sub">my name is</p>
             <p className="name-tag__name">FỌLÁBÒMÍ</p>
           </div>
+          <p className="name-tag__hint" aria-hidden="true">← drag me</p>
         </div>
 
-        <div className="hero__col hero__col--right">
+        <div className="hero__col hero__col--right" data-reveal="stagger" style={{ '--d': 500, '--step': '120ms' }}>
           <div className="facts">
             <h2 className="h-block">EXPERIENCE</h2>
             <p><strong>medicare supply chain</strong> (now)<br />product marketing &amp; app operations</p>
@@ -53,12 +57,12 @@ function Hero() {
           </div>
           <div className="facts">
             <h2 className="h-block">SKILLS</h2>
-            <TagList items={SKILLS} size="sm" />
+            <TagList items={SKILLS} size="sm" reveal={false} />
           </div>
         </div>
       </section>
 
-      <a className="link-plain hero__scroll" href="#work">
+      <a className="link-plain hero__scroll" href="#work" data-reveal style={{ '--d': 1200 }}>
         SCROLL FOR THE WORK <ArrowDown />
       </a>
     </div>
@@ -71,14 +75,14 @@ function SelectedWork() {
       <div className="section-head">
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
           <Marker>the receipts</Marker>
-          <h2 className="display" style={{ fontSize: 'clamp(48px, 7vw, 108px)' }}>SELECTED WORK</h2>
+          <h2 className="display" style={{ fontSize: 'clamp(48px, 7vw, 108px)' }} data-reveal>SELECTED WORK</h2>
         </div>
-        <p className="section-head__note">
+        <p className="section-head__note" data-reveal style={{ '--d': 150 }}>
           products, launches and operations i've helped build, take to market and improve. click any project for the full story.
         </p>
       </div>
 
-      <div className="grid-cards" style={{ '--min': '520px', '--gap': '20px' }}>
+      <div className="grid-cards" style={{ '--min': '520px', '--gap': '20px', '--step': '120ms' }} data-reveal="stagger">
         <WorkCard
           to="/work/medicare"
           tags={['PRODUCT MARKETING', 'USER RESEARCH', 'APP OPS']}
@@ -154,10 +158,10 @@ function Contact() {
       <div className="contact__inner">
         <div className="contact__pitch">
           <Marker tone="dark">write me!</Marker>
-          <h2>OPEN TO PRODUCT, MARKETING &amp; OPS ROLES.</h2>
-          <p className="contact__lede">building something interesting? tell me what you're building. i'd love to hear about it.</p>
+          <SplitWords as="h2" text="OPEN TO PRODUCT, MARKETING & OPS ROLES." />
+          <p className="contact__lede" data-reveal style={{ '--d': 300 }}>building something interesting? tell me what you're building. i'd love to hear about it.</p>
         </div>
-        <div className="contact__links">
+        <div className="contact__links" data-reveal style={{ '--d': 400 }}>
           <a className="contact__email" href={`mailto:${EMAIL}`}>{EMAIL.toUpperCase()}</a>
           <div className="tags">
             <a className="btn btn--light" href={`mailto:${EMAIL}`}>SEND AN EMAIL</a>
@@ -180,6 +184,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <Ticker items={['PRODUCT MANAGER', 'building things', 'PRODUCT MARKETER', 'taking them to market', 'OPERATIONS', 'keeping them running', 'WRITER', 'telling the story', 'POET', '14 collections']} />
       <main>
         <SelectedWork />
       </main>

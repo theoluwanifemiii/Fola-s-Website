@@ -5,6 +5,7 @@ import Marker from '../components/Marker.jsx';
 import FooterLine, { COPYRIGHT } from '../components/FooterLine.jsx';
 import { TagList } from '../components/Tags.jsx';
 import usePageTitle from '../components/usePageTitle.js';
+import { CountUp, SplitWords } from '../components/Motion.jsx';
 
 // Cover colour for each of the 14 collections, in shelf order.
 // '' = white, 'accent' = brand red, 'ink' = black, 'stone' = warm grey.
@@ -51,11 +52,11 @@ export default function Corner() {
         <section className="page-intro corner-intro">
           <div className="page-intro__main">
             <Marker>the less corporate side</Marker>
-            <h1 className="corner-title">FỌLÁ'S<br />CORNER</h1>
-            <p className="corner-lede">because there's more to me than product roadmaps, business strategies and spreadsheets.</p>
+            <h1 className="corner-title" data-reveal style={{ '--d': 200 }}>FỌLÁ'S<br />CORNER</h1>
+            <p className="corner-lede" data-reveal style={{ '--d': 450 }}>because there's more to me than product roadmaps, business strategies and spreadsheets.</p>
           </div>
-          <div className="corner-aside">
-            <TagList items={['POET', 'STORYTELLER', 'READER', 'OVERTHINKER']} solidFirst />
+          <div className="corner-aside" data-reveal style={{ '--d': 600 }}>
+            <TagList items={['POET', 'STORYTELLER', 'READER', 'OVERTHINKER']} solidFirst reveal={false} />
             <p className="body-sm" style={{ lineHeight: 1.6, maxWidth: '46ch' }}>
               years of writing about love, longing, grief, vulnerability and the strange things people do to themselves
               and one another. sometimes it becomes poetry. sometimes fiction. sometimes essays about ordinary things that
@@ -69,13 +70,13 @@ export default function Corner() {
         <section id="shelf" className="section section--rule">
           <div className="section-head">
             <div className="shelf-head">
-              <p className="big-number accent" style={{ lineHeight: 0.8 }}>14</p>
-              <h2>POETRY COLLECTIONS. ONE SHELF.</h2>
+              <p className="big-number accent" style={{ lineHeight: 0.8 }}><CountUp to={14} duration={1000} /></p>
+              <h2 data-reveal style={{ '--d': 200 }}>POETRY COLLECTIONS. ONE SHELF.</h2>
             </div>
-            <p className="shelf-note">apparently one wasn't enough</p>
+            <p className="shelf-note" data-reveal="write">apparently one wasn't enough</p>
           </div>
 
-          <div className="grid-cards shelf">
+          <div className="grid-cards shelf" data-reveal="stagger">
             {BOOKS.map((b) => <Book key={b.num} book={b} />)}
           </div>
 
@@ -86,13 +87,13 @@ export default function Corner() {
         </section>
 
         <section id="archive" className="section section--flush-top">
-          <h2 className="display" style={{ marginBottom: 32 }}>THE ARCHIVE</h2>
-          <div style={{ border: '1px solid var(--ink)' }}>
+          <h2 className="display" style={{ marginBottom: 32 }} data-reveal>THE ARCHIVE</h2>
+          <div style={{ border: '1px solid var(--ink)' }} data-reveal="stagger" >
             {ARCHIVE.map((row) => (
               <a key={row.name} className="archive__row" href={row.href}>
                 <span className="archive__name">{row.name}</span>
                 <span className="archive__desc">{row.text}</span>
-                <span className="tag">{row.cta}</span>
+                <span className="tag">{row.cta.replace(' →', '')} <span className="arrow">→</span></span>
               </a>
             ))}
           </div>
@@ -101,7 +102,7 @@ export default function Corner() {
 
       <footer className="dark confession">
         <Marker tone="dark">a small confession</Marker>
-        <p className="statement">I LOVE WORDS. THAT'S PROBABLY WHY I HAVEN'T STOPPED WRITING. AND I DON'T INTEND TO.</p>
+        <SplitWords className="statement" text="I LOVE WORDS. THAT'S PROBABLY WHY I HAVEN'T STOPPED WRITING. AND I DON'T INTEND TO." />
         <div className="tags" style={{ marginTop: 40 }}>
           <Link className="btn btn--light" to="/">← BACK TO THE DAY JOB</Link>
           <a className="btn" href="#archive">MEDIUM</a>

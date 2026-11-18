@@ -3,5 +3,5 @@ export default function Marker({ children, tone = 'accent', small, style, classN
   const cls = ['marker', tone === 'ink' && 'marker--ink', tone === 'dark' && 'marker--on-dark', small && 'marker--tilt-sm', className]
     .filter(Boolean)
     .join(' ');
-  return <p className={cls} style={style}>{children}</p>;
+  return <p className={cls} style={style} data-reveal="write">{children}</p>;
 }
